@@ -1,0 +1,58 @@
+/* ==========================================
+   IRON GRIND - EPIC BLIZZARD CSS (PART 1)
+   Core Layout, 3D Environment, Vanguard, Gauges
+   ========================================== */
+
+:root {
+    --color-void: #05070a;
+    --color-steel: #2c3e50;
+    --color-ice: #90e0ef;
+    --color-frost: #caf0f8;
+    --color-deep-blue: #03045e;
+    --color-iron: #1a1a1d;
+    --color-dark-iron: #0d0d0f;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; user-select: none; -webkit-tap-highlight-color: transparent; }
+body { background: var(--color-void); overflow: hidden; font-family: 'Cinzel', 'Times New Roman', serif; color: #fff; height: 100vh; width: 100vw; }
+
+#cinematic-container { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--color-void); perspective: 1000px; }
+#camera-rig { position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
+
+/* --- ENVIRONMENT --- */
+#cinematic-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 5; transform-style: preserve-3d; }
+#environment-container { position: absolute; bottom: 0; width: 100%; height: 100%; z-index: 1; transform: translateZ(-200px) scale(1.2); }
+.mountain-layer { position: absolute; bottom: 0; left: 0; width: 100%; background-repeat: no-repeat; background-position: bottom; opacity: 0; transition: opacity 2s; }
+#mountain-back { height: 60%; background: linear-gradient(to top, #0d0d0f 20%, transparent 100%); z-index: 1; filter: blur(2px); }
+#mountain-mid { height: 50%; background: linear-gradient(to top, #08080a 30%, transparent 100%); z-index: 2; filter: blur(1px); }
+#mountain-front { height: 40%; background: linear-gradient(to top, #050507 40%, transparent 100%); z-index: 3; }
+#ground-plane { position: absolute; bottom: 0; width: 100%; height: 15%; background: linear-gradient(to top, #000 0%, #050507 100%); z-index: 4; }
+#horizon-glow { position: absolute; bottom: 15%; left: 50%; transform: translateX(-50%); width: 80%; height: 2px; background: var(--color-ice); box-shadow: 0 0 40px 10px var(--color-ice); opacity: 0; z-index: 5; transition: opacity 2s; }
+#sky-aurora { position: absolute; top: 0; left: 0; width: 100%; height: 40%; background: radial-gradient(ellipse at 50% 100%, rgba(144, 224, 239, 0.1) 0%, transparent 70%); opacity: 0; transition: opacity 3s; z-index: 0; }
+
+/* --- VANGUARD (Spear) --- */
+#vanguard-container { position: absolute; bottom: 0; width: 100%; height: 60%; display: flex; justify-content: center; align-items: flex-end; z-index: 6; opacity: 0; transition: opacity 1s; transform: translateZ(50px); }
+#spear-shadow { position: absolute; bottom: 10%; width: 200px; height: 20px; background: radial-gradient(ellipse, rgba(0,0,0,0.8) 0%, transparent 70%); filter: blur(5px); transform: scale(0.5); }
+#iron-spear { width: 8px; height: 0%; background: linear-gradient(to top, #111, #4a4a4a, #90e0ef); box-shadow: 0 0 20px rgba(144, 224, 239, 0.6); transform: translateY(100px); transition: height 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); position: relative; z-index: 2; }
+.spear-shaft { width: 100%; height: 80%; background: #2c3e50; border-left: 1px solid #90e0ef; border-right: 1px solid #90e0ef; }
+.spear-tip { position: absolute; top: -40px; left: -16px; width: 40px; height: 50px; background: #e0f7fa; clip-path: polygon(50% 0%, 100% 60%, 80% 100%, 20% 100%, 0% 60%); filter: drop-shadow(0 0 15px #90e0ef); }
+.spear-glow { position: absolute; top: -20px; left: -20px; width: 60px; height: 80px; background: radial-gradient(circle, rgba(144, 224, 239, 0.4) 0%, transparent 70%); }
+#impact-crater { position: absolute; bottom: 15%; width: 300px; height: 100px; display: flex; justify-content: center; align-items: center; transform: scale(0); transition: transform 0.5s; }
+.crater-ring { position: absolute; border: 2px solid var(--color-ice); border-radius: 50%; opacity: 0; }
+.crater-ring:nth-child(1) { width: 100px; height: 100px; }
+.crater-ring:nth-child(2) { width: 200px; height: 200px; }
+.crater-ring:nth-child(3) { width: 300px; height: 300px; }
+.crater-glow { position: absolute; width: 400px; height: 400px; background: radial-gradient(circle, rgba(144, 224, 239, 0.2) 0%, transparent 70%); }
+
+/* --- GAUGES --- */
+#gauges-container { position: absolute; width: 100%; bottom: 20%; display: flex; justify-content: space-evenly; opacity: 0; transform: translateY(80px) scale(0.8) translateZ(20px); transition: all 1s ease-out; z-index: 7; }
+.gauge { width: 120px; height: 120px; position: relative; filter: drop-shadow(0 0 15px var(--color-deep-blue)); }
+.gauge-outer-ring { position: absolute; width: 100%; height: 100%; border: 4px solid var(--color-iron); border-radius: 50%; border-top: 4px solid var(--color-ice); transform: rotate(-45deg); transition: border-color 0.3s, box-shadow 0.3s; background: radial-gradient(circle, transparent 60%, rgba(0,0,0,0.8) 100%); }
+.gauge-inner-ring { position: absolute; top: 10%; left: 10%; width: 80%; height: 80%; border: 2px solid #333; border-radius: 50%; border-bottom: 2px solid var(--color-frost); opacity: 0.5; }
+.gauge-glass { position: absolute; top: 15%; left: 15%; width: 70%; height: 70%; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1), transparent 50%); border-radius: 50%; backdrop-filter: blur(2px); }
+.gauge-needle { position: absolute; top: 50%; left: 50%; width: 4px; height: 50px; background: var(--color-frost); transform-origin: bottom center; transform: translate(-50%, -100%) rotate(-90deg); transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); box-shadow: 0 0 15px var(--color-ice); z-index: 3; border-radius: 2px; }
+.gauge-hub { position: absolute; top: 50%; left: 50%; width: 20px; height: 20px; background: #111; border: 2px solid var(--color-ice); border-radius: 50%; transform: translate(-50%, -50%); z-index: 4; box-shadow: 0 0 10px var(--color-deep-blue); }
+.gauge-label { position: absolute; top: 115%; width: 100%; text-align: center; font-size: 14px; letter-spacing: 3px; color: var(--color-ice); text-shadow: 0 0 8px var(--color-deep-blue); font-weight: bold; font-family: sans-serif; }
+.gauge-value { position: absolute; top: 40%; width: 100%; text-align: center; font-size: 18px; color: #fff; font-family: monospace; text-shadow: 0 0 5px var(--color-ice); z-index: 2; }
+.gauge.active .gauge-outer-ring { border-top-color: var(--color-frost); box-shadow: 0 0 30px var(--color-ice), inset 0 0 20px var(--color-deep-blue); animation: spinRing 4s linear infinite; }
+@keyframes spinRing { from { transform: rotate(-45deg); } to { transform: rotate(315deg); } }
